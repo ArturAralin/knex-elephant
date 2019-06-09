@@ -1,24 +1,18 @@
 const {
   T,
   aperture,
-  pipe,
-  map,
   apply,
   cond,
-  reverse,
-  join,
-  test,
-  ifElse,
-  always,
-  match, head,
-  trim,
-  split,
-  last,
-  unapply,
   evolve,
+  join,
+  map,
+  pipe,
+  reverse,
+  unapply,
 } = require('ramda');
 const {
-  isKnex,
+  getAlias,
+  isKnexQB,
   knexRaw,
 } = require('../builder-base');
 
@@ -27,24 +21,11 @@ const makeBody = pipe(
   map(pipe(
     reverse,
     apply(cond([
-      [isKnex, (qb, key) => `'${key}', (${qb.toString()})`],
+      [isKnexQB, (qb, key) => `'${key}', (${qb.toString()})`],
       [T, (column, key) => `'${key}', "${column}"`],
     ])),
   )),
   join(', '),
-);
-
-const getAlias = ifElse(
-  test(/as /i),
-  pipe(
-    match(/as .*/i),
-    head,
-    trim,
-    split(' '),
-    last,
-    alias => ` as ${alias}`,
-  ),
-  always(''),
 );
 
 const jsonBuildObjectFactory = fnName => pipe(

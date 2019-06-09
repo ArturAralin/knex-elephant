@@ -1,53 +1,43 @@
+const {
+  pipe,
+  match,
+  head,
+  trim,
+  split,
+  last,
+  ifElse,
+  always,
+  test,
+} = require('ramda');
 const knexLib = require('knex');
 
 const knex = knexLib({ client: 'pg' });
-
 const QueryBuilder = require('knex/lib/query/builder');
+const Raw = require('knex/lib/raw');
 
-const builderBase = {
-  knex,
-  as(as) {
-    this.alias = as;
-    return this;
-  },
-  fnBuild(body) {
-    return `${this.fnName}(${body})`;
-  },
-  buildRecursive() {
-    const body = typeof this.body.buildRecursive === 'function'
-      ? this.body.buildRecursive()
-      : this.body;
-
-    switch (this.type) {
-      case 'fn':
-        return this.fnBuild(body);
-      default:
-        throw new Error(`Unknown builder type "${this.type}"`);
-    }
-  },
-  build() {
-    return {
-      [this.alias]: knex.raw(this.buildRecursive()),
-    };
-  },
-};
-
-
-const resolveArgs = (args) => {
-  if (Array.isArray(args[0])) {
-    return args[0];
-  }
-
-  return args;
-};
-
-const isKnex = o => o instanceof QueryBuilder;
+const isKnexQB = o => o instanceof QueryBuilder;
+const isKnexRaw = o => o instanceof Raw;
 
 const knexRaw = sql => knex.raw(sql);
 
+const isAlias = test(/as /i);
+const getAlias = ifElse(
+  isAlias,
+  pipe(
+    match(/as .*/i),
+    head,
+    trim,
+    split(' '),
+    last,
+    alias => ` as ${alias}`,
+  ),
+  always(''),
+);
+
 module.exports = {
-  resolveArgs,
-  builderBase,
-  isKnex,
+  isAlias,
+  getAlias,
+  isKnexQB,
+  isKnexRaw,
   knexRaw,
 };

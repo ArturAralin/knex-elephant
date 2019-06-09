@@ -1,7 +1,5 @@
-const knexLib = require('knex');
 const { expect } = require('chai');
-
-const knex = knexLib({ client: 'pg' });
+const { knex } = require('../../tests/testing-tools');
 const {
   jsonBuildObject,
   jsonbBuildObject,
@@ -43,4 +41,6 @@ describe('json[b]_build_object', () => {
 
     expect(sql).to.equals('json_build_object(\'k\', (select * from "T"))');
   });
+
+  // add case with AS
 });
