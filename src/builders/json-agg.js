@@ -66,7 +66,36 @@ const jsonAggFactory = fnName => pipe(
   knexRaw,
 );
 
+/**
+ * @func
+ * @name jsonAgg
+ * @since v0.0.1
+ * @category JSON
+ * @example
+ *  knex('photos')
+ *    .select([
+ *      'category_id',
+ *      jsonAgg('photo_url', 'as photos')
+ *    ])
+ *    .where('user_id', 1)
+ *    .groupBy('photos')
+ */
 const jsonAgg = jsonAggFactory('json_agg');
+
+/**
+ * @func
+ * @name jsonbAgg
+ * @since v0.0.1
+ * @category JSONB
+ * @example
+ *  knex('photos')
+ *    .select([
+ *      'category_id',
+ *      jsonbAgg('distinct', 'photo_url', 'as photos')
+ *    ])
+ *    .where('user_id', 1)
+ *    .groupBy('photos')
+ */
 const jsonbAgg = jsonAggFactory('jsonb_agg');
 
 module.exports = {
