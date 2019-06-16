@@ -4,7 +4,7 @@
   "description": "Knex SQL builder for custom PostgreSQL functions",
   "main": "./src/index.js",
   "scripts": {
-    "build": "webpack",
+    "build:docs": "jsdoc2md ./src/builders/**/*.js > docs.md",
     "test": "mocha ./src/*.test.js ./src/**/*.test.js"
   },
   "repository": {
@@ -26,6 +26,7 @@
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.3",
+    "jsdoc-to-markdown": "^5.0.0",
     "mocha": "^6.1.4"
   }
 }
