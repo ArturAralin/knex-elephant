@@ -1,17 +1,25 @@
 {
   "name": "knex-elephant",
-  "version": "0.0.1-beta",
+  "version": "0.0.2-beta",
   "description": "Knex SQL builder for custom PostgreSQL functions",
   "main": "./src/index.js",
   "scripts": {
     "build:docs": "jsdoc2md ./src/builders/**/*.js > docs.md",
     "test": "mocha ./src/*.test.js ./src/**/*.test.js"
   },
+  "keywords": [
+    "knex",
+    "custom",
+    "json",
+    "functions",
+    "postgres",
+    "raw"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ArturAralin/knex-elephant.git"
   },
-  "author": "",
+  "author": "Artur Aralin",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ArturAralin/knex-elephant/issues"
