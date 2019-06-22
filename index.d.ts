@@ -15,12 +15,21 @@ declare module 'knex-elephant' {
     distinct: string,
     body: string | knex.Raw,
     alias?: string,
-  ): knex.Raw
+  ): knex.Raw;
 
   export function jsonbAgg(
     distinct: string,
     body: string | knex.Raw,
     alias?: string,
-  ): knex.Raw
+  ): knex.Raw;
 
+  export function jsonArrayElements(
+    body: string | knex.Raw,
+    alias?: string,
+  ): knex.Raw;
+
+  export function jsonbArrayElements(
+    body: string | knex.Raw,
+    alias?: string,
+  ): knex.Raw;
 }
