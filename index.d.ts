@@ -32,4 +32,55 @@ declare module 'knex-elephant' {
     body: string | knex.Raw,
     alias?: string,
   ): knex.Raw;
+
+  export function unnest(
+    body: string | knex.Raw | knex.QueryBuilder,
+    alias?: string,
+  ): knex.Raw;
+
+  type UnnestArrayArg = string[] | number[];
+  export function unnest(
+    arr0: UnnestArrayArg,
+    alias?: string,
+  ): knex.Raw;
+
+  export function unnest(
+    arr0: UnnestArrayArg,
+    arr1: UnnestArrayArg,
+    alias?: string,
+  ): knex.Raw;
+
+  export function unnest(
+    arr0: UnnestArrayArg,
+    arr1: UnnestArrayArg,
+    arr2: UnnestArrayArg,
+    alias?: string,
+  ): knex.Raw;
+
+  export function unnest(
+    arr0: UnnestArrayArg,
+    arr1: UnnestArrayArg,
+    arr2: UnnestArrayArg,
+    arr3: UnnestArrayArg,
+    alias?: string,
+  ): knex.Raw;
+
+  export function unnest(
+    arr0: UnnestArrayArg,
+    arr1: UnnestArrayArg,
+    arr2: UnnestArrayArg,
+    arr3: UnnestArrayArg,
+    arr4: UnnestArrayArg,
+    alias?: string,
+  ): knex.Raw;
+
+  export function unnest(
+    arr0: UnnestArrayArg,
+    arr1: UnnestArrayArg,
+    arr2: UnnestArrayArg,
+    arr3: UnnestArrayArg,
+    arr4: UnnestArrayArg,
+    arr5: UnnestArrayArg,
+    alias?: string,
+  ): knex.Raw;
 }
