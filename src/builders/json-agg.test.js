@@ -8,11 +8,11 @@ describe('json[b]_agg', () => {
   it('knex compatibility', () => {
     const sql = knex
       .select(
-        jsonAgg('"field"'),
+        jsonAgg('t.field'),
       )
       .toString();
 
-    expect(sql).to.equals('select json_agg("field")');
+    expect(sql).to.equals('select json_agg("t"."field")');
   });
 
   it('compatibility with Raw query', () => {
@@ -25,23 +25,23 @@ describe('json[b]_agg', () => {
   it('should create json_agg construction', () => {
     const sql = jsonAgg('some_query').toString();
 
-    expect(sql).to.equals('json_agg(some_query)');
+    expect(sql).to.equals('json_agg("some_query")');
   });
 
   it('should create json_agg construction with alias', () => {
     const sql = jsonAgg('some_query', 'as xxx').toString();
 
-    expect(sql).to.equals('json_agg(some_query) as xxx');
+    expect(sql).to.equals('json_agg("some_query") as xxx');
   });
 
   it('should create json_agg construction with distinct', () => {
     const sql = jsonAgg('distinct', 'some_query').toString();
 
-    expect(sql).to.equals('json_agg(distinct some_query)');
+    expect(sql).to.equals('json_agg(distinct "some_query")');
   });
 
   it('should create json_agg construction with alias and distinct keyword', () => {
-    const sql = jsonAgg('distinct', '"hello_world"', 'as FFF').toString();
+    const sql = jsonAgg('distinct', 'hello_world', 'as FFF').toString();
 
     expect(sql).to.equals('json_agg(distinct "hello_world") as FFF');
   });

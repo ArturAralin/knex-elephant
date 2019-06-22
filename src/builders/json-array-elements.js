@@ -11,16 +11,18 @@ const {
   isKnexRaw,
   getAlias,
   knexRaw,
+  handleColumn,
 } = require('../builder-base');
 
 const handleBody = cond([
   [isKnexRaw, raw => `(${raw.toString()})`],
-  [T, identity],
+  [T, handleColumn],
 ]);
 
 /**
  * Process n-th element function
  * f(arr[n])
+ * @private
  * @param {Number} n - index
  * @param {Function} f - handler
  */

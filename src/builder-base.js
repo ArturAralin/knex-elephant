@@ -1,13 +1,15 @@
 const {
-  pipe,
-  match,
-  head,
-  trim,
-  split,
-  last,
-  ifElse,
   always,
+  head,
+  ifElse,
+  join,
+  last,
+  map,
+  match,
+  pipe,
+  split,
   test,
+  trim,
 } = require('ramda');
 const knexLib = require('knex');
 
@@ -34,9 +36,16 @@ const getAlias = ifElse(
   always(''),
 );
 
+const handleColumn = pipe(
+  split('.'),
+  map(columnName => `"${columnName}"`),
+  join('.'),
+);
+
 module.exports = {
-  isAlias,
   getAlias,
+  handleColumn,
+  isAlias,
   isKnexQB,
   isKnexRaw,
   knexRaw,

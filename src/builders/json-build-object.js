@@ -16,6 +16,7 @@ const {
   isKnexQB,
   isKnexRaw,
   knexRaw,
+  handleColumn,
 } = require('../builder-base');
 
 const isRawOrQB = anyPass([
@@ -29,7 +30,7 @@ const makeBody = pipe(
     reverse,
     apply(cond([
       [isRawOrQB, (qb, key) => `'${key}', (${qb.toString()})`],
-      [T, (column, key) => `'${key}', "${column}"`],
+      [T, (column, key) => `'${key}', ${handleColumn(column)}`],
     ])),
   )),
   join(', '),

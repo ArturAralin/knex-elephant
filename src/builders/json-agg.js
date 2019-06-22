@@ -16,6 +16,7 @@ const {
 } = require('ramda');
 const {
   getAlias,
+  handleColumn,
   isAlias,
   isKnexRaw,
   knexRaw,
@@ -28,7 +29,7 @@ const isDistinctKeyword = allPass([
 
 const handleBody = cond([
   [isKnexRaw, raw => raw.toString()],
-  [T, v => String(v)],
+  [T, handleColumn],
 ]);
 
 const lengthEq = propEq('length');
@@ -37,6 +38,7 @@ const jsonAggFactory = fnName => pipe(
   unapply(identity),
   cond([
     [lengthEq(1), pipe(
+      head,
       handleBody,
       v => ['', v, ''],
     )],
