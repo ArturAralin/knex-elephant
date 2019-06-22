@@ -1,12 +1,11 @@
 const {
   always,
-  head,
   ifElse,
   join,
-  last,
   map,
-  match,
+  nth,
   pipe,
+  slice,
   split,
   test,
   trim,
@@ -45,11 +44,9 @@ const isAlias = test(/as /i);
 const getAlias = ifElse(
   isAlias,
   pipe(
-    match(/as .*/i),
-    head,
     trim,
-    split(' '),
-    last,
+    slice(2, Infinity),
+    trim,
     alias => ` as ${alias}`,
   ),
   always(''),
@@ -61,6 +58,15 @@ const handleColumn = pipe(
   join('.'),
 );
 
+/**
+ * Process n-th element function
+ * f(arr[n])
+ * @private
+ * @param {Number} n - index
+ * @param {Function} f - handler
+ */
+const P = (n, f) => pipe(nth(n), f);
+
 module.exports = {
   getAlias,
   handleColumn,
@@ -68,4 +74,5 @@ module.exports = {
   isKnexQB,
   isKnexRaw,
   knexRaw,
+  P,
 };

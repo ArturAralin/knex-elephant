@@ -3,30 +3,21 @@ const {
   cond,
   identity,
   juxt,
-  nth,
   pipe,
   unapply,
 } = require('ramda');
 const {
-  isKnexRaw,
+  P,
   getAlias,
-  knexRaw,
   handleColumn,
+  isKnexRaw,
+  knexRaw,
 } = require('../builder-base');
 
 const handleBody = cond([
   [isKnexRaw, raw => `(${raw.toString()})`],
   [T, handleColumn],
 ]);
-
-/**
- * Process n-th element function
- * f(arr[n])
- * @private
- * @param {Number} n - index
- * @param {Function} f - handler
- */
-const P = (n, f) => pipe(nth(n), f);
 
 const jsonArrayElementsFactory = fnName => pipe(
   unapply(identity),
