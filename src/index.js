@@ -10,6 +10,7 @@ const {
   jsonArrayElements,
   jsonbArrayElements,
 } = require('./builders/json-array-elements');
+const { unnest } = require('./builders/unnest');
 
 module.exports = {
   jsonAgg,
@@ -18,4 +19,5 @@ module.exports = {
   jsonbAgg,
   jsonbArrayElements,
   jsonbBuildObject,
+  unnest,
 };
