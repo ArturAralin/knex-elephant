@@ -1,6 +1,8 @@
 ## Functions
 
 <dl>
+<dt><a href="#unnest">unnest()</a></dt>
+<dd></dd>
 <dt><a href="#jsonAgg">jsonAgg()</a></dt>
 <dd></dd>
 <dt><a href="#jsonArrayElements">jsonArrayElements()</a></dt>
@@ -15,6 +17,22 @@
 <dd></dd>
 </dl>
 
+<a name="unnest"></a>
+
+## unnest()
+**Kind**: global function  
+**Category**: Array  
+**Since**: v0.0.4-beta  
+**Example**  
+```js
+knex
+   .select('*')
+   .from(unnest(
+     [1, 2, 3],
+     ['first', 'second', 'third'],
+     'as aliases(number, alias)',
+   ));
+```
 <a name="jsonAgg"></a>
 
 ## jsonAgg()
