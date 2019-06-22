@@ -1,6 +1,6 @@
 {
   "name": "knex-elephant",
-  "version": "0.0.2-beta",
+  "version": "0.0.3-beta",
   "description": "Knex SQL builder for custom PostgreSQL functions",
   "main": "./src/index.js",
   "scripts": {
