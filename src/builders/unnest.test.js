@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { knex } = require('../../tests/testing-tools');
 const { unnest } = require('../index');
 
-describe.only('unnest', () => {
+describe('unnest', () => {
   it('Knex.QueryBuilder compatibility', () => {
     const sql = unnest(
       knex
