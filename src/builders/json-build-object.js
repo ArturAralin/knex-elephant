@@ -1,6 +1,5 @@
 const {
   T,
-  anyPass,
   aperture,
   apply,
   cond,
@@ -13,16 +12,10 @@ const {
 } = require('ramda');
 const {
   getAlias,
-  isKnexQB,
-  isKnexRaw,
-  knexRaw,
   handleColumn,
+  isRawOrQB,
+  knexRaw,
 } = require('../builder-base');
-
-const isRawOrQB = anyPass([
-  isKnexQB,
-  isKnexRaw,
-]);
 
 const makeBody = pipe(
   aperture(2),

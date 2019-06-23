@@ -1,6 +1,5 @@
 const {
   T,
-  anyPass,
   compose,
   cond,
   equals,
@@ -19,8 +18,7 @@ const {
   P,
   getAlias,
   handleColumn,
-  isKnexQB,
-  isKnexRaw,
+  isRawOrQB,
   knexRaw,
 } = require('../builder-base');
 
@@ -28,7 +26,7 @@ const isArray = compose(equals('Array'), type);
 const isNumber = compose(equals('Number'), type);
 const isString = compose(equals('String'), type);
 const isFirstIsString = pipe(head, isString);
-const isFirstIsAnyKnex = pipe(head, anyPass([isKnexQB, isKnexRaw]));
+const isFirstIsAnyKnex = pipe(head, isRawOrQB);
 
 const handleType = cond([
   [isString, v => `'${v}'`],

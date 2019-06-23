@@ -1,4 +1,5 @@
 const {
+  anyPass,
   always,
   ifElse,
   join,
@@ -33,12 +34,24 @@ const isKnexQB = o => o instanceof QueryBuilder;
 const isKnexRaw = o => o instanceof Raw;
 
 /**
+ * Checking on instance of Knex.Raw or Knex.QueryBuilder
+ * @private
+ * @param o - some object
+ * @returns {Boolean}
+ */
+const isRawOrQB = anyPass([
+  isKnexQB,
+  isKnexRaw,
+]);
+
+/**
  * Wrap text into Knex.Raw
  * @private
  * @param {String} sql
  * @returns {Knex.Raw}
  */
 const knexRaw = sql => knex.raw(sql);
+
 
 const isAlias = test(/as /i);
 const getAlias = ifElse(
@@ -68,11 +81,12 @@ const handleColumn = pipe(
 const P = (n, f) => pipe(nth(n), f);
 
 module.exports = {
+  P,
   getAlias,
   handleColumn,
   isAlias,
   isKnexQB,
   isKnexRaw,
+  isRawOrQB,
   knexRaw,
-  P,
 };
