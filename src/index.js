@@ -12,11 +12,15 @@ const {
 } = require('./builders/json-array-elements');
 const { unnest } = require('./builders/unnest');
 const { rowToJson } = require('./builders/row-to-json');
+const {
+  jsonToRecordset,
+} = require('./builders/json-to-recordset');
 
 module.exports = {
   jsonAgg,
   jsonArrayElements,
   jsonBuildObject,
+  jsonToRecordset,
   jsonbAgg,
   jsonbArrayElements,
   jsonbBuildObject,
