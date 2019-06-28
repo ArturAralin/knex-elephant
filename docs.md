@@ -11,6 +11,12 @@
 <dd></dd>
 <dt><a href="#jsonBuildObject">jsonBuildObject()</a></dt>
 <dd></dd>
+<dt><a href="#jsonToRecordset">jsonToRecordset(body, [alias])</a></dt>
+<dd></dd>
+<dt><a href="#jsonToRecordset">jsonToRecordset(body, [alias])</a></dt>
+<dd></dd>
+<dt><a href="#rowToJson">rowToJson()</a></dt>
+<dd></dd>
 <dt><a href="#jsonbAgg">jsonbAgg()</a></dt>
 <dd></dd>
 <dt><a href="#jsonBuildObject">jsonBuildObject()</a></dt>
@@ -79,6 +85,65 @@ knex('users')
      ]),
    ])
    .leftJoin('avatars', 'avatars.user_id', 'users.id');
+```
+<a name="jsonToRecordset"></a>
+
+## jsonToRecordset(body, [alias])
+**Kind**: global function  
+**Category**: JSON  
+**Since**: v0.0.5-beta  
+
+| Param | Type |
+| --- | --- |
+| body | <code>Array.&lt;Object&gt;</code> \| <code>Knex.Raw</code> \| <code>String</code> | 
+| [alias] | <code>String</code> | 
+
+**Example**  
+```js
+knex
+   .select('*')
+   .from(jsonToRecordset([
+     { id: 1, name: 'Vasiliy' },
+     { id: 2, name: 'Dmitry' },
+     { id: 3, name: 'Nikita' },
+   ], 'as (id int, name text)'));
+```
+<a name="jsonToRecordset"></a>
+
+## jsonToRecordset(body, [alias])
+**Kind**: global function  
+**Category**: JSON  
+**Since**: v0.0.5-beta  
+
+| Param | Type |
+| --- | --- |
+| body | <code>Array.&lt;Object&gt;</code> \| <code>Knex.Raw</code> \| <code>String</code> | 
+| [alias] | <code>String</code> | 
+
+**Example**  
+```js
+knex
+   .select('*')
+   .from(jsonbToRecordset([
+     { id: 1, name: 'Vasiliy' },
+     { id: 2, name: 'Dmitry' },
+     { id: 3, name: 'Nikita' },
+   ], 'as (id int, name text)'));
+```
+<a name="rowToJson"></a>
+
+## rowToJson()
+**Kind**: global function  
+**Category**: JSON  
+**Since**: v0.0.5-beta  
+**Example**  
+```js
+knex('users')
+   .select([
+     'users.*',
+     rowToJson('configs')
+   ])
+   .leftJoin('configs', 'configs.user_id', 'users.id');
 ```
 <a name="jsonbAgg"></a>
 
