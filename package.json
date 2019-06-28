@@ -5,7 +5,8 @@
   "main": "./src/index.js",
   "scripts": {
     "build:docs": "jsdoc2md ./src/builders/**/*.js > docs.md",
-    "test": "mocha ./src/*.test.js ./src/**/*.test.js"
+    "test": "mocha ./src/*.test.js ./src/**/*.test.js",
+    "lint": "eslint ."
   },
   "keywords": [
     "knex",
