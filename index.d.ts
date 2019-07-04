@@ -1,13 +1,15 @@
 import * as knex from 'knex';
 
+type KnexRawOrQB = knex.QueryBuilder | knex.Raw;
+
 declare module 'knex-elephant' {
   export function jsonBuildObject(
-    fields: Array<string | knex.QueryBuilder | knex.Raw>,
+    fields: Array<string | KnexRawOrQB>,
     alias?: string,
   ): knex.Raw;
 
   export function jsonbBuildObject(
-    fields: Array<string | knex.QueryBuilder | knex.Raw>,
+    fields: Array<string | KnexRawOrQB>,
     alias?: string,
   ): knex.Raw;
 
@@ -34,7 +36,7 @@ declare module 'knex-elephant' {
   ): knex.Raw;
 
   export function unnest(
-    body: string | knex.Raw | knex.QueryBuilder,
+    body: string | KnexRawOrQB,
     alias?: string,
   ): knex.Raw;
 
@@ -81,6 +83,26 @@ declare module 'knex-elephant' {
     arr3: UnnestArrayArg,
     arr4: UnnestArrayArg,
     arr5: UnnestArrayArg,
+    alias?: string,
+  ): knex.Raw;
+
+  export function jsonToRecordset<T = any>(
+    body: T[] | KnexRawOrQB,
+    alias?: string,
+  ): knex.Raw;
+
+  export function jsonbToRecordset<T = any>(
+    body: T[] | KnexRawOrQB,
+    alias?: string,
+  ): knex.Raw;
+
+  export function jsonEach<T = any>(
+    body: T | KnexRawOrQB,
+    alias?: string,
+  ): knex.Raw;
+
+  export function jsonbEach<T = any>(
+    body: T | KnexRawOrQB,
     alias?: string,
   ): knex.Raw;
 }
