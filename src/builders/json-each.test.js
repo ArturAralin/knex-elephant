@@ -5,7 +5,7 @@ const {
 } = require('../index');
 const { knex } = require('../../tests/testing-tools');
 
-describe.only('json[b]_each', () => {
+describe('json[b]_each', () => {
   it('compatibility with Knex.Raw', () => {
     const sql = jsonEach(knex.raw('some_raw_query')).toString();
 
