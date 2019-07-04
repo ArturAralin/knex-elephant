@@ -1,4 +1,5 @@
 const {
+  T,
   cond,
   identity,
   is,
@@ -7,16 +8,17 @@ const {
   unapply,
 } = require('ramda');
 const {
-  getAlias,
-  isKnexRaw,
   P,
+  getAlias,
+  handleColumn,
+  isRawOrQB,
   knexRaw,
 } = require('../builder-base');
 
 const handleBody = cond([
-  [is(String), body => `'${body}'`],
   [is(Array), arr => `'${JSON.stringify(arr)}'`],
-  [isKnexRaw, raw => raw.toString()],
+  [isRawOrQB, raw => raw.toString()],
+  [T, handleColumn],
 ]);
 
 const jsonToRecordsetFactory = fnName => pipe(
@@ -32,8 +34,6 @@ const jsonToRecordsetFactory = fnName => pipe(
 /**
  * @func
  * @name jsonToRecordset
- * @param {Object[] | Knex.Raw | String} body
- * @param {String} [alias]
  * @since v0.0.5-beta
  * @category JSON
  * @example
@@ -50,8 +50,6 @@ const jsonToRecordset = jsonToRecordsetFactory('json_to_recordset');
 /**
  * @func
  * @name jsonToRecordset
- * @param {Object[] | Knex.Raw | String} body
- * @param {String} [alias]
  * @since v0.0.5-beta
  * @category JSON
  * @example
