@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/ArturAralin/knex-elephant#readme",
   "dependencies": {
-    "knex": "^0.17.6",
+    "knex": "^0.19.5",
     "ramda": "^0.26.1"
   },
   "devDependencies": {
