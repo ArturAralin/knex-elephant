@@ -1,8 +1,8 @@
-import { expect } from 'chai';
 import {
   formatColumns,
   raw,
 } from './tools';
+import { expect } from 'chai';
 
 describe('tools', () => {
   describe('formatColumns', () => {

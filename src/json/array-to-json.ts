@@ -1,16 +1,15 @@
-import * as knex from 'knex';
 import {
   pgFn,
   raw,
   formatColumns,
 } from '../tools';
+import * as knex from 'knex';
 
 function internalArrayToJson(
   fnName: string,
   v: knex.Raw | string,
   prettyBool: boolean = false,
 ) {
-
   const args = [
     formatColumns(v),
     prettyBool ? raw('true') : '',

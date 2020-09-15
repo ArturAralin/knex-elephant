@@ -1,6 +1,6 @@
-import { expect } from 'chai';
-import { raw } from '../tools';
 import { jsonBuildObject } from './json-build-object';
+import { raw } from '../tools';
+import { expect } from 'chai';
 
 describe('json[b]_build_object', () => {
   it('should return json_build_object("column_name", raw_value)', () => {

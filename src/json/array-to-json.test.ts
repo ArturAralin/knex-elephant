@@ -1,5 +1,6 @@
-import { expect } from 'chai';
 import { arrayToJson, arrayToJsonb } from './array-to-json';
+
+import { expect } from 'chai';
 
 describe('array_to_json[b]', () => {
   it('should return array_to_json("column")', () => {

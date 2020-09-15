@@ -1,6 +1,11 @@
+import {
+  serialize,
+  isRaw,
+  formatColumns,
+  pgFn
+} from '../tools';
 import * as knex from 'knex';
 
-import { serialize, isRaw, formatColumns, pgFn } from '../tools';
 
 type Value = knex.Raw | string | number | boolean | null;
 
