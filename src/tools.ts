@@ -74,3 +74,10 @@ export function serialize(p: string | number | boolean | null | knex.Raw): strin
       throw new Error('Unsupported primitive serializing');
   }
 }
+
+export function alias(name: string, v: string | knex.Raw): knex.Raw {
+  const aliasColumn = formatColumns(name);
+  const sql = `${v} as ${aliasColumn}`;
+
+  return raw(sql);
+}

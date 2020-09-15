@@ -1,6 +1,7 @@
 import {
   formatColumns,
   raw,
+  alias,
 } from './tools';
 import { expect } from 'chai';
 
@@ -41,5 +42,13 @@ describe('tools', () => {
       expect(result.bindings).to.eqls([10]);
       expect(result.toString()).to.equals('select 10');
     })
+  });
+
+  describe('alias', () => {
+    it('should set alias', () => {
+      const result = alias('another_name', raw('original_name')).toString();
+
+      expect(result).to.equals('original_name as "another_name"');
+    });
   });
 });
