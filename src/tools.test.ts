@@ -45,10 +45,16 @@ describe('tools', () => {
   });
 
   describe('alias', () => {
-    it('should set alias', () => {
+    it('should set alias with raw', () => {
       const result = alias('another_name', raw('original_name')).toString();
 
       expect(result).to.equals('original_name as "another_name"');
+    });
+
+    it('should set alias with column', () => {
+      const result = alias('another_name', 'original_name').toString();
+
+      expect(result).to.equals('"original_name" as "another_name"');
     });
   });
 });
