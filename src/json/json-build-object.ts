@@ -4,10 +4,8 @@ import {
   formatColumns,
   pgFn
 } from '../tools';
+import { Value } from '../types';
 import * as knex from 'knex';
-
-
-type Value = knex.Raw | string | number | boolean | null;
 
 interface JsonBuildObjectMap {
   [key: string]: Value;
