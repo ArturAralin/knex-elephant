@@ -2,6 +2,7 @@ import {
   formatColumns,
   raw,
   alias,
+  castTo,
 } from './tools';
 import { expect } from 'chai';
 
@@ -55,6 +56,20 @@ describe('tools', () => {
       const result = alias('another_name', 'original_name').toString();
 
       expect(result).to.equals('"original_name" as "another_name"');
+    });
+  });
+
+  describe('castTo', () => {
+    it('should return "column_name"::json', () => {
+      const result = castTo('json', 'column_name').toString();
+
+      expect(result).to.equals('"column_name"::json');
+    });
+
+    it('should return raw_value::json', () => {
+      const result = castTo('json', raw('raw_value')).toString();
+
+      expect(result).to.equals('raw_value::json');
     });
   });
 });

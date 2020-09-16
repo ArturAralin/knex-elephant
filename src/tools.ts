@@ -83,3 +83,11 @@ export function alias(name: string, v: string | knex.Raw): knex.Raw {
 
   return raw(`${value} as ${aliasColumn}`);
 }
+
+export function castTo(type: string, v: string | knex.Raw): knex.Raw {
+  const value = isRaw(v)
+    ? v
+    : formatColumns(v);
+
+  return raw(`${value}::${type}`);
+}
