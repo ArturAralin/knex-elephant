@@ -6,4 +6,6 @@ export * from './json/operators';
 export {
   alias,
   castTo,
+  jsonStringify,
+  jsonbStringify,
 } from './tools';

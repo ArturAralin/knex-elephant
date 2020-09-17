@@ -3,6 +3,8 @@ import {
   raw,
   alias,
   castTo,
+  jsonStringify,
+  jsonbStringify,
 } from './tools';
 import { expect } from 'chai';
 
@@ -70,6 +72,20 @@ describe('tools', () => {
       const result = castTo('json', raw('raw_value')).toString();
 
       expect(result).to.equals('raw_value::json');
+    });
+  });
+
+  describe('json[b]Stringify', () => {
+    it('should stringify value with cast to json', () => {
+      const result = jsonStringify({ field: 'it\'s value' }).toString();
+
+      expect(result).to.equals(`'{"field":"it''s value"}'::json`);
+    });
+
+    it('should stringify value with cast to jsonb', () => {
+      const result = jsonbStringify({ field: 'it\'s value' }).toString();
+
+      expect(result).to.equals(`'{"field":"it''s value"}'::jsonb`);
     });
   });
 });

@@ -91,3 +91,17 @@ export function castTo(type: string, v: string | knex.Raw): knex.Raw {
 
   return raw(`${value}::${type}`);
 }
+
+function internalJsonStringify(type: string, v: unknown): knex.Raw {
+  const json = JSON.stringify(v).replace("'", "''");
+
+  return raw(`'${json}'::${type}`);
+}
+
+export function jsonbStringify(v: unknown): knex.Raw {
+  return internalJsonStringify('jsonb', v);
+}
+
+export function jsonStringify(v: unknown): knex.Raw {
+  return internalJsonStringify('json', v);
+}
