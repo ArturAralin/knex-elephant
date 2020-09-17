@@ -1,6 +1,6 @@
 import knex from 'knex';
 
-const client = knex({ client: 'pg' });
+export const client = knex({ client: 'pg' });
 
 export type Value = number
   | string
@@ -10,7 +10,7 @@ export type Value = number
 // Knex doesn't export Raw class directly
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const Raw = client.raw('').__proto__.constructor;
+export const Raw = client.raw('').__proto__.constructor;
 
 export const raw = (
   sql: string,

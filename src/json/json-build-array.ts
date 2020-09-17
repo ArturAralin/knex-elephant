@@ -5,6 +5,7 @@ import {
   pgFn
 } from '../tools';
 import { Value } from '../types';
+import Builder from '../builder';
 import * as knex from 'knex';
 
 function mapValue(v: Value) {
@@ -22,16 +23,16 @@ function mapValue(v: Value) {
 function internalJsonBuildArray(
   fnName: string,
   values: Value[],
-): knex.Raw {
+): Builder {
   const args = values.map(mapValue);
 
-  return pgFn(fnName, args);
+  return new Builder(pgFn(fnName, args));
 }
 
-export function jsonBuildArray(v: Value[]): knex.Raw {
+export function jsonBuildArray(v: Value[]): Builder {
   return internalJsonBuildArray('json_build_array', v);
 }
 
-export function jsonbBuildArray(v: Value[]): knex.Raw {
+export function jsonbBuildArray(v: Value[]): Builder {
   return internalJsonBuildArray('jsonb_build_array', v);
 }

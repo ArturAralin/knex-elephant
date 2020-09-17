@@ -1,8 +1,17 @@
 import { jsonBuildObject } from './json-build-object';
 import { raw } from '../tools';
+import Builder from '../builder';
 import { expect } from 'chai';
 
 describe('json[b]_build_object', () => {
+  it('should be instance of Builder', () => {
+    const result = jsonBuildObject({
+      column_name: raw('raw_value')
+    }).as('another_name');
+
+    expect(result).to.be.instanceOf(Builder);
+  });
+
   it('should return json_build_object("column_name", raw_value)', () => {
     const result = jsonBuildObject({
       column_name: raw('raw_value')
