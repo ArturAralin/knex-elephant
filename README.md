@@ -1,6 +1,6 @@
 # knex-elephant
 
-description will come soon
+PostgreSQL special sql functions for Knex library
 
 # how to use
 ```typescript
