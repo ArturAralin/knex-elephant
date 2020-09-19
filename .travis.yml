@@ -1,7 +1,8 @@
-language: nodejs
+language: node_js
 
 script:
-  - npm ci
+  - npm install
+  - npm install knex
   - npm test
 
 cache:
