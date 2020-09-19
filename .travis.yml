@@ -2,6 +2,7 @@ language: nodejs
 
 script:
   - npm ci
+  - npm test
 
 cache:
   directories:
