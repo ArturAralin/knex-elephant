@@ -9,11 +9,11 @@
     "lint": "eslint . --ext .ts"
   },
   "keywords": [
-    "knex",
     "postgres",
-    "sql",
     "functions",
-    "builder"
+    "json",
+    "array",
+    "knex"
   ],
   "repository": {
     "type": "git",
