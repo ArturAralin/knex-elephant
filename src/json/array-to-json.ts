@@ -6,6 +6,9 @@ import {
 import Builder from '../builder';
 import * as knex from 'knex';
 
+/**
+ * @internal
+ */
 function internalArrayToJson(
   fnName: string,
   v: knex.Raw | string,

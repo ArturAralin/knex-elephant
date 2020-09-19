@@ -1,4 +1,4 @@
-import { client } from './tools';
+import { client, raw } from './tools';
 import Builder from './builder';
 import { expect } from 'chai';
 
@@ -9,5 +9,24 @@ describe('Builder', () => {
     ]).toString();
 
     expect(result).to.equals('select some_raw_value');
+  });
+
+  it('should keep attached bindings', () => {
+    const builder = new Builder(raw('select ?;', ['some string']));
+    const sqlObj = builder.toSQL();
+
+    expect(sqlObj.sql).to.eqls('select ?;');
+    expect(sqlObj.bindings).to.eqls(['some string']);
+    expect(builder.toString()).to.equals(`select 'some string';`);
+  });
+
+  it('should push bindings', () => {
+    const builder = new Builder(raw('select ?;')).pushBindings(['some string']);
+
+    const sqlObj = builder.toSQL();
+
+    expect(sqlObj.sql).to.eqls('select ?;');
+    expect(sqlObj.bindings).to.eqls(['some string']);
+    expect(builder.toString()).to.equals(`select 'some string';`);
   });
 });

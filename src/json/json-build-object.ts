@@ -12,6 +12,9 @@ interface JsonBuildObjectMap {
   [key: string]: Value;
 }
 
+/**
+ * @internal
+ */
 function mapValue(v: Value) {
   if (isRaw(v)) {
     return (v as knex.Raw).toString();
@@ -24,6 +27,9 @@ function mapValue(v: Value) {
   return serialize(v);
 }
 
+/**
+ * @internal
+ */
 function internalJsonBuildObject(
   fnName: string,
   v: JsonBuildObjectMap,

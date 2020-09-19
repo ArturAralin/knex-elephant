@@ -4,7 +4,7 @@
   "description": "Knex SQL builder for custom PostgreSQL functions",
   "main": "./src/index.js",
   "scripts": {
-    "build:docs": "jsdoc2md ./src/builders/**/*.js > docs.md",
+    "build:docs": "typedoc --out ./docs ./src --stripInternal",
     "test": "mocha --require ts-node/register ./**/*.test.ts src/**/*.test.ts",
     "lint": "eslint . --ext .ts"
   },
@@ -40,6 +40,7 @@
     "eslint-plugin-import": "^2.22.0",
     "mocha": "^8.1.3",
     "ts-node": "^9.0.0",
+    "typedoc": "^0.19.1",
     "typescript": "^4.0.2"
   }
 }

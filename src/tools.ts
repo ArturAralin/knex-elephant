@@ -1,5 +1,8 @@
 import knex from 'knex';
 
+/**
+ * @internal
+ */
 export const client = knex({ client: 'pg' });
 
 export type Value = number
@@ -7,18 +10,31 @@ export type Value = number
   | boolean
   | Date;
 
+
+/**
+ * @internal
+ */
 // Knex doesn't export Raw class directly
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 export const Raw = client.raw('').__proto__.constructor;
 
+/**
+ * @internal
+ */
 export const raw = (
   sql: string,
   bindings: readonly Value[] = [],
 ): knex.Raw => client.raw(sql, bindings);
 
+/**
+ * @internal
+ */
 export const isRaw = (v: unknown): boolean => typeof v === 'object' && v instanceof Raw;
 
+/**
+ * @internal
+ */
 export const formatColumns = (
   v: string | knex.Raw
 ): string => {
@@ -45,16 +61,23 @@ export const formatColumns = (
   return `${column}${alias}`;
 }
 
+/**
+ * @internal
+ */
 export function pgFn(
   functionName: string,
   args: (knex.Raw | string)[],
-  bindings: readonly Value[] = [],
-): knex.Raw {
-  const value = args.join(', ');
+): string {
+  const argsStr = args
+    .map((arg) => arg.toString())
+    .join(', ');
 
-  return raw(`${functionName}(${value})`, bindings);
+  return `${functionName}(${argsStr})`;
 }
 
+/**
+ * @internal
+ */
 export function serialize(p: string | number | boolean | null | knex.Raw): string {
   if (isRaw(p)) {
     return (p as knex.Raw).toString();
@@ -92,6 +115,9 @@ export function castTo(type: string, v: string | knex.Raw): knex.Raw {
   return raw(`${value}::${type}`);
 }
 
+/**
+ * @internal
+ */
 function internalJsonStringify(type: string, v: unknown): knex.Raw {
   const json = JSON.stringify(v).replace("'", "''");
 

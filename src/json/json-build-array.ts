@@ -8,6 +8,9 @@ import { Value } from '../types';
 import Builder from '../builder';
 import * as knex from 'knex';
 
+/**
+ * @internal
+ */
 function mapValue(v: Value) {
   if (isRaw(v)) {
     return (v as knex.Raw).toString();
@@ -20,6 +23,9 @@ function mapValue(v: Value) {
   return serialize(v);
 }
 
+/**
+ * @internal
+ */
 function internalJsonBuildArray(
   fnName: string,
   values: Value[],

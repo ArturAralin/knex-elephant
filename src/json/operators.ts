@@ -5,6 +5,9 @@ import {
 } from '../tools';
 import knex from 'knex';
 
+/**
+ * @internal
+ */
 function internalJsonValueAccess(
   operator: string,
   prop: string | number,
@@ -21,21 +24,21 @@ function internalJsonValueAccess(
 }
 
 /**
- * ->
+ * Implementation for operator ->
  */
 export function jsonProp(prop: string | number, v: string | knex.Raw): knex.Raw {
   return internalJsonValueAccess('->', prop, v);
 }
 
 /**
- * ->>
+ * Implementation for operator ->>
  */
 export function jsonPropValue(prop: string | number, v: string | knex.Raw): knex.Raw {
   return internalJsonValueAccess('->>', prop, v);
 }
 
 /**
- * #>
+ * Implementation for operator #>
  */
 export function jsonPath(props: (string | number)[], v: string | knex.Raw): knex.Raw {
   const args = `{${props.join(', ')}}`;
@@ -44,7 +47,7 @@ export function jsonPath(props: (string | number)[], v: string | knex.Raw): knex
 }
 
 /**
- * #>
+ * Implementation for operator #>
  */
 export function jsonPathValue(props: (string | number)[], v: string | knex.Raw): knex.Raw {
   const args = `{${props.join(', ')}}`;
