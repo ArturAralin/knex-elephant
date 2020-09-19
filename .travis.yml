@@ -1,0 +1,8 @@
+language: nodejs
+
+script:
+  - npm ci
+
+cache:
+  directories:
+  - "$HOME/.npm"
