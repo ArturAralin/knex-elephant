@@ -138,3 +138,23 @@ export function jsonStringify(v: unknown): knex.Raw {
 export function str(v: string): knex.Raw {
   return raw('?', [v]);
 }
+
+/**
+ * @internal
+ */
+export function getValue(v: knex.Raw | string): [string, Value[]] {
+  if (isRaw(v)) {
+    const {
+      sql,
+      bindings,
+    } = (v as knex.Raw).toSQL();
+
+    return [sql, bindings as Value[]];
+  }
+
+  if (typeof v === 'string') {
+    return [formatColumns(v), []];
+  }
+
+  return [serialize(v), []];
+}

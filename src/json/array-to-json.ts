@@ -1,28 +1,11 @@
 import {
   pgFn,
   raw,
-  formatColumns,
-  isRaw,
-  Value as BindingValue,
+  getValue,
 } from '../tools';
 import Builder from '../builder';
 import * as knex from 'knex';
 
-/**
- * @internal
- */
-function getValue(v: knex.Raw | string | Builder): [string, BindingValue[]] {
-  if (isRaw(v) || v instanceof Builder) {
-    const {
-      sql,
-      bindings,
-    } = (v as knex.Raw).toSQL();
-
-    return [sql, bindings as BindingValue[]];
-  }
-
-  return [formatColumns(v), []];
-}
 
 /**
  * @internal
@@ -32,7 +15,7 @@ function internalArrayToJson(
   v: knex.Raw | string | Builder,
   prettyBool: boolean = false,
 ): Builder {
-  const [value, bindings] = getValue(v);
+  const [value, bindings] = getValue(v as knex.Raw);
 
   const args = [
     value,
