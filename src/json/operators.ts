@@ -54,5 +54,3 @@ export function jsonPathValue(props: (string | number)[], v: string | knex.Raw):
 
   return internalJsonValueAccess('#>>', args, v);
 }
-
-// .update('x', castTo('json', ))

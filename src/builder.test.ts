@@ -1,4 +1,4 @@
-import { client, raw } from './tools';
+import { client, raw, isRaw } from './tools';
 import Builder from './builder';
 import { expect } from 'chai';
 
@@ -28,5 +28,11 @@ describe('Builder', () => {
     expect(sqlObj.sql).to.eqls('select ?;');
     expect(sqlObj.bindings).to.eqls(['some string']);
     expect(builder.toString()).to.equals(`select 'some string';`);
+  });
+
+  it('should extends of knex.Raw', () => {
+    const builder = new Builder('');
+
+    expect(isRaw(builder)).to.equals(true);
   });
 });
