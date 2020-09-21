@@ -131,3 +131,10 @@ export function jsonbStringify(v: unknown): knex.Raw {
 export function jsonStringify(v: unknown): knex.Raw {
   return internalJsonStringify('json', v);
 }
+
+/**
+ * Helper for escaping converting string to column
+ */
+export function str(v: string): knex.Raw {
+  return raw('?', [v]);
+}
