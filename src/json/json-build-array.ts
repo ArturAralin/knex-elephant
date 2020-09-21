@@ -2,26 +2,13 @@ import {
   serialize,
   isRaw,
   formatColumns,
-  pgFn
+  pgFn,
+  Value as BindingValue,
 } from '../tools';
 import { Value } from '../types';
 import Builder from '../builder';
 import * as knex from 'knex';
 
-/**
- * @internal
- */
-function mapValue(v: Value) {
-  if (isRaw(v)) {
-    return (v as knex.Raw).toString();
-  }
-
-  if (typeof v === 'string') {
-    return formatColumns(v);
-  }
-
-  return serialize(v);
-}
 
 /**
  * @internal
@@ -30,9 +17,33 @@ function internalJsonBuildArray(
   fnName: string,
   values: Value[],
 ): Builder {
-  const args = values.map(mapValue);
+  const bindings: BindingValue[] = [];
+  const args: string[] = [];
 
-  return new Builder(pgFn(fnName, args));
+  values.forEach((value: Value) => {
+    if (isRaw(value) || value instanceof Builder) {
+      const {
+        sql,
+        bindings: rawBindings,
+      } = (value as knex.Raw).toSQL();
+
+      args.push(sql);
+      bindings.push(...rawBindings);
+
+      return;
+    }
+
+    // handle string as column
+    if (typeof value === 'string') {
+      args.push(formatColumns(value));
+
+      return;
+    }
+
+    args.push(serialize(value));
+  });
+
+  return new Builder(pgFn(fnName, args)).pushBindings(bindings);
 }
 
 export function jsonBuildArray(v: Value[]): Builder {
